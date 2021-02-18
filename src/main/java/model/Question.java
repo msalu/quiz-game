@@ -17,19 +17,12 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "questions_id")
-    private int questionsId;
-
-    public Question(String question, String answer) {
-        this.question = question;
-        this.correctAnswer = answer;
-    }
+    private int questionId;
 
     @Column(name = "question")
     private String question;
 
-    private String correctAnswer;
-
-    @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
+    public Question(String question) {
+        this.question = question;
+    }
 }

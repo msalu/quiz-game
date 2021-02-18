@@ -13,14 +13,21 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name = "questions")
-public class Questions {
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "questions_id")
     private int questionsId;
 
+    public Question(String question, String answer) {
+        this.question = question;
+        this.correctAnswer = answer;
+    }
+
     @Column(name = "question")
     private String question;
+
+    private String correctAnswer;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")

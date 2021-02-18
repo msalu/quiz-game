@@ -13,7 +13,7 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name = "answer")
-public class Answers {
+public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "answers_id")
@@ -22,10 +22,11 @@ public class Answers {
     @Column(name = "answer")
     private String answer;
 
+    @Deprecated
     @Column(name = "correct_answer")
     private boolean correctAnswer;
 
     @ManyToOne
     @JoinColumn(name = "questions_id")
-    private Questions questions;
+    private Question questions;
 }

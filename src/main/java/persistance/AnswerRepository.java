@@ -25,7 +25,7 @@ public class AnswerRepository {
     }
 
     public List<Answer> answersWhereQuestionIdIsSame(int id){
-        String sql = "FROM Answer WHERE Answer.question.questionId = :id";
+        String sql = "FROM Answer a WHERE a.question.questionId = :id";
         return entityManager.createQuery(sql).setParameter("id", id).getResultList();
     }
 }

@@ -22,11 +22,16 @@ public class Answer {
     @Column(name = "answer")
     private String answer;
 
-    @Deprecated
     @Column(name = "correct_answer")
-    private boolean correctAnswer;
+    private boolean isCorrectAnswer;
 
     @ManyToOne
     @JoinColumn(name = "questions_id")
-    private Question questions;
+    private Question question;
+
+    public Answer(String answer, boolean isCorrectAnswer, Question question) {
+        this.answer = answer;
+        this.isCorrectAnswer = isCorrectAnswer;
+        this.question = question;
+    }
 }

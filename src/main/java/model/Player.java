@@ -23,5 +23,10 @@ public class Player {
     private String firstName;
 
     @Column(name = "score")
-    private String score;
+    private int score;
+
+    public Player(String firstName) {
+        this.firstName = firstName;
+        score = 0;
+    }
 }

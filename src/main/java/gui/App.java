@@ -9,15 +9,16 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
+
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/startMenu.fxml"));
-        stage.setTitle("Java Quiz Game");
-        stage.setScene(new Scene(root, 500, 700));
-        stage.show();
+        primaryStage.setTitle("Java Quiz Game");
+        primaryStage.setScene(new Scene(root, 500, 700));
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

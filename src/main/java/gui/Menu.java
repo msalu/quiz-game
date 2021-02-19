@@ -1,5 +1,5 @@
 package gui;
 
-public class Menu {
+public class Menu{
 
 }

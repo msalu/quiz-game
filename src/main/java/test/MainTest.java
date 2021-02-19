@@ -13,7 +13,12 @@ public class MainTest {
     public static void main(String[] args) {
 
         QuestionRepository questionRepository = new QuestionRepository();
+        AnswerRepository answerRepository = new AnswerRepository();
         Scanner scanner = new Scanner(System.in);
+
         Question question = questionRepository.findQuestionById(1);
+        System.out.println(question.getQuestion());
+        List<Answer> answers = answerRepository.answersWhereQuestionIdIsSame(1);
+        answers.forEach(answer -> System.out.println(answer.getAnswer()));
     }
 }

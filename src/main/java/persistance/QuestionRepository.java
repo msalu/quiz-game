@@ -22,4 +22,8 @@ public class QuestionRepository {
             e.printStackTrace();
         }
     }
+
+    public Question findQuestionById(int id) {
+        return entityManager.find(Question.class, id);
+    }
 }

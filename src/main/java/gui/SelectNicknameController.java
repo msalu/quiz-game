@@ -1,5 +1,6 @@
 package gui;
 
+import controller.PlayerController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,16 +19,20 @@ import java.util.ResourceBundle;
 public class SelectNicknameController implements Initializable {
 
     private Scene scene;
-    private PlayerRepository playerRepository;
-    private Player player;
+    private PlayerController playerController;
     private Stage stage = new Stage();
 
     @FXML
     private TextField nickname;
 
+    public SelectNicknameController() {
+        playerController = new PlayerController();
+    }
 
     @FXML
     public void onClick(ActionEvent event){
+        String name = nickname.getText();
+        playerController.savePlayer(name);
         try {
             Node source = (Node) event.getSource();
             stage = (Stage) source.getScene().getWindow();
@@ -40,13 +45,6 @@ public class SelectNicknameController implements Initializable {
         }
     }
 
-    @FXML
-    public void saveOnClick(){
-        String name = nickname.getText();
-        player = new Player(name);
-        playerRepository = new PlayerRepository();
-        playerRepository.save(player);
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

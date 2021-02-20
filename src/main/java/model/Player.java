@@ -22,7 +22,6 @@ public class Player {
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "score")
     private int score;
 
     public Player(String firstName) {

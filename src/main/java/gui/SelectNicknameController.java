@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Player;
@@ -22,6 +24,9 @@ public class SelectNicknameController implements Initializable {
     private PlayerController playerController;
     private Stage stage = new Stage();
 
+    Alert.AlertType alertAlertType;
+    private Alert alert = new Alert(AlertType.NONE);
+
     @FXML
     private TextField nickname;
 
@@ -33,15 +38,24 @@ public class SelectNicknameController implements Initializable {
     public void onClick(ActionEvent event){
         String name = nickname.getText();
         playerController.savePlayer(name);
-        try {
-            Node source = (Node) event.getSource();
-            stage = (Stage) source.getScene().getWindow();
-            stage.close();
-            scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/questionMenu.fxml")));
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (nickname.getText().isEmpty() || nickname.getText() == null){
+            alert.setAlertType(AlertType.ERROR);
+            alert.setContentText("Nickname field should not be empty!");
+            alert.show();
+        }
+
+        if(!alert.isShowing()) {
+            try {
+                Node source = (Node) event.getSource();
+                stage = (Stage) source.getScene().getWindow();
+                stage.close();
+                scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/questionMenu.fxml")));
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

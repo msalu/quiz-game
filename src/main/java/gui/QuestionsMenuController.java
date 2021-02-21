@@ -18,6 +18,7 @@ public class QuestionsMenuController implements Initializable {
 
     private Stage stage;
     private Scene scene;
+    private static int count = 1;
 
     @FXML
     private Label playerText;
@@ -33,6 +34,7 @@ public class QuestionsMenuController implements Initializable {
 
     @FXML
     public void  onClickCheckAnswer(ActionEvent event){
+        count++;
         try{
             Node source = (Node) event.getSource();
             stage = (Stage) source.getScene().getWindow();
@@ -50,10 +52,7 @@ public class QuestionsMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         QuestionRepository qr = new QuestionRepository();
-//        int max = 2;
-//        int min = 1;
-//        int randomNumber =(int) (Math.random() * (max - min + 1) + min);
-//        questionText.setText(qr.findQuestionById(randomNumber).getQuestion());
+        questionText.setText(qr.findQuestionById(count).getQuestion());
     }
 
 

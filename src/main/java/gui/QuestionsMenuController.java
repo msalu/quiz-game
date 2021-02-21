@@ -56,6 +56,7 @@ public class QuestionsMenuController implements Initializable {
     @FXML
     public void  onClickCheckAnswer(ActionEvent event){
         alert.setAlertType(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Are you sure?");
         Optional<ButtonType> result = alert.showAndWait();
         RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
         Answer correctAnswer = answerRepository.getByQuestionIdCorrectAnswer(count);

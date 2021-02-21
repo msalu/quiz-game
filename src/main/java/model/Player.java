@@ -19,14 +19,13 @@ public class Player {
     @Column(name = "player_id")
     private int playerId;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "score")
     private int score;
 
-    public Player(String firstName) {
-        this.firstName = firstName;
+    public Player(String name) {
+        this.name = name;
         score = 0;
     }
 }

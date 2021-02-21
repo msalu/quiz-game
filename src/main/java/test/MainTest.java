@@ -12,14 +12,13 @@ import java.util.Scanner;
 public class MainTest {
 
     public static void main(String[] args) {
+        AnswerRepository answerRepository = new AnswerRepository();
+        Question question = new Question();
+        question.setQuestionId(2);
 
-//        QuestionRepository questionRepository = new QuestionRepository();
-//        AnswerRepository answerRepository = new AnswerRepository();
-//        Scanner scanner = new Scanner(System.in);
-//
-//        Question question = questionRepository.findQuestionById(1);
-//        System.out.println(question.getQuestion());
-//        List<Answer> answers = answerRepository.answersWhereQuestionIdIsSame(1);
-//        answers.forEach(answer -> System.out.println(answer.getAnswer()));
+        Answer answer = new Answer("sfgdfgdfg", false, question);
+        answerRepository.save(answer);
+
+
     }
 }

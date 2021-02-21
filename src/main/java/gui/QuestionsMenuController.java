@@ -9,9 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
+import model.Answer;
+import persistance.AnswerRepository;
 import persistance.QuestionRepository;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class QuestionsMenuController implements Initializable {
@@ -52,6 +55,15 @@ public class QuestionsMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         currentQuestion(count);
+
+        AnswerRepository answerRepository = new AnswerRepository();
+        RadioButton[] radioButtons = new RadioButton[]{option1, option2, option3, option4};
+        List<Answer> answers = answerRepository.answersWhereQuestionIdIsSame(count);
+        for (int i = 0; i <=radioButtons.length; i++){
+            for(Answer answer : answers){
+                radioButtons[i].setText(answer.getAnswer());
+            }
+        }
     }
 
     private void currentQuestion(int questionId) {

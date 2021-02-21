@@ -51,8 +51,12 @@ public class QuestionsMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        currentQuestion(count);
+    }
+
+    private void currentQuestion(int questionId) {
         QuestionRepository qr = new QuestionRepository();
-        questionText.setText(qr.findQuestionById(count).getQuestion());
+        questionText.setText(qr.findQuestionById(questionId).getQuestion());
     }
 
 

@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionsMenuController">
    <children>
       <GridPane>
@@ -22,7 +21,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="playerText" prefHeight="17.0" prefWidth="227.0" text="Player 1">
+            <Label fx:id="playerText" prefHeight="17.0" prefWidth="227.0" text="SCORE:">
                <padding>
                   <Insets left="50.0" />
                </padding>
@@ -31,6 +30,9 @@
                <padding>
                   <Insets left="50.0" />
                </padding>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
             </Label>
          </children>
       </GridPane>
@@ -49,7 +51,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <RadioButton fx:id="option1" mnemonicParsing="false" prefHeight="17.0" prefWidth="171.0" text="RadioButton">
+            <RadioButton fx:id="option1" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="171.0" text="RadioButton">
                <padding>
                   <Insets left="50.0" />
                </padding>

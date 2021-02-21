@@ -24,7 +24,6 @@ public class SelectNicknameController implements Initializable {
     private PlayerController playerController;
     private Stage stage = new Stage();
 
-    Alert.AlertType alertAlertType;
     private Alert alert = new Alert(AlertType.NONE);
 
     @FXML

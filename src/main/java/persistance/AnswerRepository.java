@@ -28,4 +28,9 @@ public class AnswerRepository {
         String sql = "FROM Answer a WHERE a.question.questionId = :id";
         return entityManager.createQuery(sql).setParameter("id", id).getResultList();
     }
+
+    public Answer getByQuestionIdCorrectAnswer(int id){
+        String sql = "FROM Answer a WHERE a.isCorrectAnswer = true AND a.question.questionId = :id";
+        return entityManager.createQuery(sql, Answer.class).setParameter("id", id).getSingleResult();
+    }
 }

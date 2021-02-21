@@ -26,12 +26,12 @@ public class PlayerRepository {
 
     public Player findByName(String name){
         String sql = "FROM Player AS p WHERE p.name = :name";
-        return (Player) entityManager.createQuery(sql).setParameter("name", name);
+        return entityManager.createQuery(sql, Player.class).setParameter("name", name).getSingleResult();
     }
 
-    public List<Player> getLastEntry(){
+    public Player getLastEntry(){
         String sql = "FROM Player p ORDER BY p.playerId DESC";
 
-        return entityManager.createQuery(sql).setMaxResults(1).getResultList();
+        return entityManager.createQuery(sql, Player.class).setMaxResults(1).getSingleResult();
     }
 }

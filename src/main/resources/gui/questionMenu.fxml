@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -55,25 +56,28 @@
                <padding>
                   <Insets left="50.0" />
                </padding>
+               <toggleGroup>
+                  <ToggleGroup fx:id="toggleGroup" />
+               </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="option2" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="164.0" text="RadioButton" GridPane.columnIndex="1">
+            <RadioButton fx:id="option2" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="164.0" text="RadioButton" toggleGroup="$toggleGroup" GridPane.columnIndex="1">
                <padding>
                   <Insets left="50.0" />
                </padding>
             </RadioButton>
-            <RadioButton fx:id="option3" layoutX="310.0" layoutY="74.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="163.0" text="RadioButton" GridPane.rowIndex="1">
+            <RadioButton fx:id="option3" layoutX="310.0" layoutY="74.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="163.0" text="RadioButton" toggleGroup="$toggleGroup" GridPane.rowIndex="1">
                <padding>
                   <Insets left="50.0" />
                </padding>
             </RadioButton>
-            <RadioButton fx:id="option4" layoutX="310.0" layoutY="74.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="159.0" text="RadioButton" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <RadioButton fx:id="option4" layoutX="310.0" layoutY="74.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="159.0" text="RadioButton" toggleGroup="$toggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <padding>
                   <Insets left="50.0" />
                </padding>
             </RadioButton>
          </children>
       </GridPane>
-      <Button fx:id="checkButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onClickCheckAnswer" prefHeight="25.0" prefWidth="121.0" text=" Next question" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+      <Button fx:id="checkButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onClickCheckAnswer" prefHeight="46.0" prefWidth="121.0" text=" Next question" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

@@ -1,11 +1,13 @@
 package controller;
 
-public class QuestionController {
+import model.Answer;
 
+public class QuestionController {
+    private Answer answer;
     public QuestionController() {
     }
 
-    public void checkCorrectAnswer(){
+    public void checkCorrectAnswer(Answer answer){
 
     }
 

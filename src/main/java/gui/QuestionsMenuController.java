@@ -8,9 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.Answer;
+import model.Player;
 import persistance.AnswerRepository;
+import persistance.PlayerRepository;
 import persistance.QuestionRepository;
 
 import java.net.URL;
@@ -23,6 +26,7 @@ public class QuestionsMenuController implements Initializable {
     private Stage stage;
     private Scene scene;
     private static int count = 1;
+    private static int score = 0;
 
     @FXML
     private Label playerText;
@@ -37,17 +41,34 @@ public class QuestionsMenuController implements Initializable {
     private RadioButton option1, option2, option3, option4;
 
     @FXML
+    private ToggleGroup toggleGroup;
+
+    private QuestionRepository qr;
+
+    private AnswerRepository answerRepository;
+
+    public QuestionsMenuController(){
+        qr = new QuestionRepository();
+        answerRepository = new AnswerRepository();
+    }
+
+    @FXML
     public void  onClickCheckAnswer(ActionEvent event){
-        count++;
-        try{
-            Node source = (Node) event.getSource();
-            stage = (Stage) source.getScene().getWindow();
-            stage.close();
-            scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/questionMenu.fxml")));
-            stage.setScene(scene);
-            stage.show();
-        }catch (Exception e){
-            e.printStackTrace();
+        RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
+        Answer correctAnswer = answerRepository.getByQuestionIdCorrectAnswer(count);
+        if (selectedRadioButton.getText().equals(correctAnswer.getAnswer())) {
+        score += 10;
+            count++;
+            try {
+                Node source = (Node) event.getSource();
+                stage = (Stage) source.getScene().getWindow();
+                stage.close();
+                scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/questionMenu.fxml")));
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -57,10 +78,13 @@ public class QuestionsMenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         currentQuestion(count);
         radioButtonsAnswersText(count);
+        scoreNumber.setText(Integer.toString(score));
+        PlayerRepository playerRepository = new PlayerRepository();
+        Player player = playerRepository.getLastEntry();
+        playerText.setText(player.getName());
     }
 
     private void radioButtonsAnswersText(int questionId) {
-        AnswerRepository answerRepository = new AnswerRepository();
         List<Answer> answers = answerRepository.answersWhereQuestionIdIsSame(questionId);
         option1.setText(answers.get(0).getAnswer());
         option2.setText(answers.get(1).getAnswer());
@@ -69,7 +93,6 @@ public class QuestionsMenuController implements Initializable {
     }
 
     private void currentQuestion(int questionId) {
-        QuestionRepository qr = new QuestionRepository();
         questionText.setText(qr.findQuestionById(questionId).getQuestion());
     }
 

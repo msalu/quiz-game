@@ -14,6 +14,7 @@ import persistance.AnswerRepository;
 import persistance.QuestionRepository;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -57,11 +58,18 @@ public class QuestionsMenuController implements Initializable {
         currentQuestion(count);
 
         AnswerRepository answerRepository = new AnswerRepository();
-        RadioButton[] radioButtons = new RadioButton[]{option1, option2, option3, option4};
+
+        List<RadioButton> radioButtons = new ArrayList<>();
+        radioButtons.add(option1);
+        radioButtons.add(option2);
+        radioButtons.add(option3);
+        radioButtons.add(option4);
+
         List<Answer> answers = answerRepository.answersWhereQuestionIdIsSame(count);
-        for (int i = 0; i <=radioButtons.length; i++){
+
+        for(RadioButton radioButton : radioButtons){
             for(Answer answer : answers){
-                radioButtons[i].setText(answer.getAnswer());
+                radioButton.setText(answer.getAnswer());
             }
         }
     }

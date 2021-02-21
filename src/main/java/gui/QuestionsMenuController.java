@@ -9,14 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
-import model.Count;
-import model.Player;
-import persistance.PlayerRepository;
 import persistance.QuestionRepository;
 
 import java.net.URL;
-import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class QuestionsMenuController implements Initializable {
@@ -35,8 +30,6 @@ public class QuestionsMenuController implements Initializable {
 
     @FXML
     private RadioButton option1, option2, option3, option4;
-
-    private Count count = new Count();
 
     @FXML
     public void  onClickCheckAnswer(ActionEvent event){
@@ -57,14 +50,10 @@ public class QuestionsMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         QuestionRepository qr = new QuestionRepository();
-        int init = count.getCounter() + 1;
-        count.setCounter(init);
 //        int max = 2;
 //        int min = 1;
 //        int randomNumber =(int) (Math.random() * (max - min + 1) + min);
 //        questionText.setText(qr.findQuestionById(randomNumber).getQuestion());
-        questionText.setText(qr.findQuestionById(count.getCounter()).getQuestion());
-
     }
 
 

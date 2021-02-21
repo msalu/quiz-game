@@ -56,22 +56,16 @@ public class QuestionsMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         currentQuestion(count);
+        radioButtonsAnswersText(count);
+    }
 
+    private void radioButtonsAnswersText(int questionId) {
         AnswerRepository answerRepository = new AnswerRepository();
-
-        List<RadioButton> radioButtons = new ArrayList<>();
-        radioButtons.add(option1);
-        radioButtons.add(option2);
-        radioButtons.add(option3);
-        radioButtons.add(option4);
-
-        List<Answer> answers = answerRepository.answersWhereQuestionIdIsSame(count);
-
-        for(RadioButton radioButton : radioButtons){
-            for(Answer answer : answers){
-                radioButton.setText(answer.getAnswer());
-            }
-        }
+        List<Answer> answers = answerRepository.answersWhereQuestionIdIsSame(questionId);
+        option1.setText(answers.get(0).getAnswer());
+        option2.setText(answers.get(1).getAnswer());
+        option3.setText(answers.get(2).getAnswer());
+        option4.setText(answers.get(3).getAnswer());
     }
 
     private void currentQuestion(int questionId) {

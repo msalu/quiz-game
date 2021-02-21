@@ -3,11 +3,6 @@ package test;
 import model.Answer;
 import model.Question;
 import persistance.AnswerRepository;
-import persistance.QuestionRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class MainTest {
 

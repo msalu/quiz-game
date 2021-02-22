@@ -7,9 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import model.Player;
-import persistance.PlayerRepository;
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,11 +15,9 @@ public class EndGameController implements Initializable {
 
     private Stage stage;
     private PlayerController playerController;
-    private PlayerRepository playerRepository;
 
     public EndGameController(){
         playerController = new PlayerController();
-        playerRepository = new PlayerRepository();
     }
 
     @FXML
@@ -37,8 +32,7 @@ public class EndGameController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Player player = playerRepository.getLastEntry();
-        fieldText.setText(Integer.toString(player.getScore()));
+        fieldText.setText(Integer.toString(playerController.getLastSavedPlayersScore()));
     }
 
 }

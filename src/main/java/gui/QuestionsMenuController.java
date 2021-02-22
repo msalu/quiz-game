@@ -25,7 +25,7 @@ public class QuestionsMenuController implements Initializable {
     private Stage stage;
     private Scene scene;
     private static int count = 1;
-    private static int score = Score.getScoreInstance().returnNum();
+    private Score score;
 
     @FXML
     private Label playerText;
@@ -51,6 +51,7 @@ public class QuestionsMenuController implements Initializable {
     public QuestionsMenuController(){
         qr = new QuestionRepository();
         answerRepository = new AnswerRepository();
+        score = Score.getScoreInstance();
     }
 
     @FXML
@@ -71,7 +72,6 @@ public class QuestionsMenuController implements Initializable {
                 count++;
                 closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
             }else if(!checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){
-                score = score;
                 count++;
                 closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
             }

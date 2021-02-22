@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Answer;
-import model.Score;
 import persistance.AnswerRepository;
 
 
@@ -29,7 +28,7 @@ public class QuestionsMenuController implements Initializable {
     private static int questionCounter = 1;
     private static final int POINTS_PER_CORRECT_ANSWER = 1;
     private static final int AMOUNT_OF_QUESTIONS_IN_QUIZ = 5;
-    private Score score;
+    private static int score;
 
     private QuestionController questionController;
     private PlayerController playerController;
@@ -53,7 +52,6 @@ public class QuestionsMenuController implements Initializable {
 
     public QuestionsMenuController(){
         answerRepository = new AnswerRepository();
-        score = Score.getScoreInstance();
         questionController = new QuestionController();
         playerController = new PlayerController();
     }
@@ -80,8 +78,9 @@ public class QuestionsMenuController implements Initializable {
 
     private void checkIfCorrectThenAssignPointsElseNoPointsAndNextQuestion(ActionEvent event, RadioButton selectedRadioButton, Answer correctAnswer) {
         if (questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)) {
-            score.increaseScore(POINTS_PER_CORRECT_ANSWER);
-            playerController.saveLastSavedPlayersScore(score.returnNum());
+            score = playerController.getLastSavedPlayersScore();
+            score = score + POINTS_PER_CORRECT_ANSWER;
+            playerController.saveLastSavedPlayersScore(score);
             questionCounter++;
         }else if(!questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){
             questionCounter++;

@@ -124,7 +124,7 @@ public class QuestionsMenuController implements Initializable {
     }
 
     private void setPlayerNameToDisplay() {
-        playerText.setText(Integer.toString(score.returnNum()));
+        playerText.setText(playerController.getLastSavedPlayerNameAndReturnItsValue());
     }
 
     private void setScoreToDisplay() {

@@ -10,12 +10,13 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sda_quiz_project?createDatabaseIfNotExist=true&amp;serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sda_quiz_project2?createDatabaseIfNotExist=true&amp;serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="dwmwh6x8xt477cpf" />
+            <property name="javax.persistence.jdbc.password" value="pahkel3108" />
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.format_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.import_files" value="import.sql"/>
             <!-- <property name="hibernate.hbm2ddl.auto" value="create" /> /> -->
             <!-- <property name="hibernate.hbm2ddl.auto" value="validate" /> /> -->
         </properties>

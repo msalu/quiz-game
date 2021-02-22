@@ -8,7 +8,7 @@
 
 <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartMenuController">
    <children>
-      <DialogPane contentText="Wellcome to Java Quiz Game. Select Your Difficulty.You will have 10 questions, each answear grants points.BlaBlaBla for future referenceWellcome to Java Quiz Game. Select Your Difficulty.You will have 10 questions, each answear grants points.BlaBlaBla for future reference" prefHeight="212.0" prefWidth="386.0" />
+      <DialogPane contentText="Welcome to Programming Quiz. You will be asked five questions, there can be only one correct answer. Correct answer gives player 1 point. GOOD LUCK! " prefHeight="212.0" prefWidth="386.0" />
       <Button mnemonicParsing="false" onAction="#nextPageButton" text="Next">
          <VBox.margin>
             <Insets top="50.0" />

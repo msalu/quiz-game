@@ -67,7 +67,7 @@ public class QuestionsMenuController implements Initializable {
         if (result.get() == ButtonType.OK){
 
             if (checkIfCorrectAnswer(selectedRadioButton, correctAnswer)) {
-                Score.increaseScore(20);
+                Score.increaseScore(1);
                 count++;
                 closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
             }else if(!checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){

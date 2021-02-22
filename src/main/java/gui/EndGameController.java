@@ -15,6 +15,11 @@ import java.util.ResourceBundle;
 public class EndGameController implements Initializable {
 
     private Stage stage;
+    private Score score;
+
+    public EndGameController(){
+        score = Score.getScoreInstance();
+    }
 
     @FXML
     private Label fieldText;
@@ -28,7 +33,6 @@ public class EndGameController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        QuestionsMenuController questionsMenuController = new QuestionsMenuController();
-        fieldText.setText(Integer.toString(Score.getScoreInstance().returnNum()));
+        fieldText.setText(Integer.toString(score.returnNum()));
     }
 }

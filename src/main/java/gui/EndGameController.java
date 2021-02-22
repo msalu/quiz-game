@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Player;
-import model.Score;
 import persistance.PlayerRepository;
 
 
@@ -41,4 +40,5 @@ public class EndGameController implements Initializable {
         Player player = playerRepository.getLastEntry();
         fieldText.setText(Integer.toString(player.getScore()));
     }
+
 }

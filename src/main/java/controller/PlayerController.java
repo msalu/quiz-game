@@ -15,4 +15,19 @@ public class PlayerController {
         Player player = new Player(name);
         playerRepository.save(player);
     }
+
+    public String getLastSavedPlayerNameAndReturnItsValue(){
+        return playerRepository.getLastEntry().getName();
+    }
+
+    public void saveLastSavedPlayersScore(int newScoreValue){
+        Player player = playerRepository.getLastEntry();
+        player.setScore(newScoreValue);
+        playerRepository.update(player);
+    }
+
+    public int getLastSavedPlayersScore(){
+        Player player = playerRepository.getLastEntry();
+        return player.getScore();
+    }
 }

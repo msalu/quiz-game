@@ -34,4 +34,14 @@ public class PlayerRepository {
 
         return entityManager.createQuery(sql, Player.class).setMaxResults(1).getSingleResult();
     }
+
+    public void update(Player player){
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.merge(player);
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            entityManager.getTransaction().rollback();
+        }
+    }
 }

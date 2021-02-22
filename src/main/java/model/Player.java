@@ -22,6 +22,7 @@ public class Player {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "score")
     private int score;
 
     public Player(String name) {

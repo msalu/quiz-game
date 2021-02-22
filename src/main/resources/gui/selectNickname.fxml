@@ -8,7 +8,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SelectNicknameController">
    <children>
-      <DialogPane contentText="Please enter your name or nickname:" style="-fx-max-width: 230;" />
+      <DialogPane contentText="Please enter your name or nickname:" style="-fx-max-width: 200;" />
       <TextField fx:id="nickname" promptText="Nickname" style="-fx-border-radius: 20; -fx-max-width: 150;" />
       <Button fx:id="btnStart" mnemonicParsing="false" onAction="#onClick" text="Start">
          <VBox.margin>

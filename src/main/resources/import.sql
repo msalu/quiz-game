@@ -1,0 +1,26 @@
+INSERT INTO questions (questions_id, question) VALUES (1,'1.What OOP stands for?');
+INSERT INTO questions (questions_id, question) VALUES (2,'2.What is the naming convention for SQL?');
+INSERT INTO questions (questions_id, question) VALUES (3,'3.Who invented the JAVA programming language?');
+INSERT INTO questions (questions_id, question) VALUES (4,'4.What does a void method return in Java?');
+INSERT INTO questions (questions_id, question) VALUES (5,'5.What type is used for true or false statement in SQL?');
+
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (1,'Object oriented programming', true, 1);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (2,'Out-of-process', false, 1);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (3,'Out of program', false, 1);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (4,'Ordinary object pointer', false, 1);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (5,'Camel case', false, 2);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (6,'Pascal case', false, 2);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (7,'Snake case', true, 2);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (8,'Kebab case', false, 2);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (9,'Bill Joy', false, 3);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (10,'James Gosling', true, 3);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (11,'Dennis Ritchie', false, 3);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (12,'Bjarne Stroustrup', false, 3);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (13,'No value', true, 4);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (14,'Int', false, 4);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (15,'String', false, 4);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (16,'Boolean', false, 4);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (17,'Integer', false, 5);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (18,'Int', false, 5);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (19,'Boolean', false, 5);
+INSERT INTO answers (answers_id, answer, correct_answer, questions_id) VALUES (20,'Tinyint', true, 5);

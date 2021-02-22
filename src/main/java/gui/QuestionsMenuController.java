@@ -98,7 +98,7 @@ public class QuestionsMenuController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+           new NoMoreQuestionsException("No more Questions");
         }
     }
 

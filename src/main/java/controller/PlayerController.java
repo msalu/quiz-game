@@ -15,4 +15,8 @@ public class PlayerController {
         Player player = new Player(name);
         playerRepository.save(player);
     }
+
+    public String getLastSavedPlayerNameAndReturnItsValue(){
+        return playerRepository.getLastEntry().getName();
+    }
 }

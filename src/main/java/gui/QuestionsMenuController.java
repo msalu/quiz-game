@@ -1,5 +1,7 @@
 package gui;
 
+import controller.PlayerController;
+import controller.QuestionController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,8 +26,17 @@ public class QuestionsMenuController implements Initializable {
 
     private Stage stage;
     private Scene scene;
-    private static int count = 1;
+    private Alert alert = new Alert(Alert.AlertType.NONE);
+
+    private static int questionCounter = 1;
+    private static final int POINTS_PER_CORRECT_ANSWER = 1;
+    private static final int AMOUNT_OF_QUESTIONS_IN_QUIZ = 5;
     private Score score;
+
+    private QuestionController questionController;
+    private PlayerController playerController;
+
+    private AnswerRepository answerRepository;
 
     @FXML
     private Label playerText;
@@ -42,48 +53,42 @@ public class QuestionsMenuController implements Initializable {
     @FXML
     private ToggleGroup toggleGroup;
 
-    private QuestionRepository qr;
-
-    private Alert alert = new Alert(Alert.AlertType.NONE);
-
-    private AnswerRepository answerRepository;
-
     public QuestionsMenuController(){
-        qr = new QuestionRepository();
         answerRepository = new AnswerRepository();
         score = Score.getScoreInstance();
+        questionController = new QuestionController();
+        playerController = new PlayerController();
     }
 
     @FXML
     public void  onClickCheckAnswer(ActionEvent event){
         alert.setAlertType(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Are you sure?");
-        Optional<ButtonType> result = alert.showAndWait();
+
+        Optional<ButtonType> confirmationAlert = alert.showAndWait();
         RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
-        Answer correctAnswer = answerRepository.getByQuestionIdCorrectAnswer(count);
+        Answer correctAnswer = answerRepository.getByQuestionIdCorrectAnswer(questionCounter);
 
-        if (count == 5) {
-            closeWindowAndOpenNext(event, "gui/endGame.fxml");
-        }
-        if (result.get() == ButtonType.OK){
+        if (questionCounter == AMOUNT_OF_QUESTIONS_IN_QUIZ) closeWindowAndOpenNext(event, "gui/endGame.fxml");
 
-            if (checkIfCorrectAnswer(selectedRadioButton, correctAnswer)) {
-                Score.increaseScore(1);
-                count++;
-                closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
-            }else if(!checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){
-                count++;
-                closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
-            }
-        }else if(result.get() == ButtonType.CANCEL){
+        if (confirmationAlert.get() == ButtonType.OK){
+            checkIfCorrectThenAssignPointsElseNoPointsAndNextQuestion(event, selectedRadioButton, correctAnswer);
+            closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
+        }else if(confirmationAlert.get() == ButtonType.CANCEL){
             return;
         }
 
     }
 
-    private boolean checkIfCorrectAnswer(RadioButton selectedRadio, Answer correctAnswer){
-        return selectedRadio.getText().equals(correctAnswer.getAnswer());
+    private void checkIfCorrectThenAssignPointsElseNoPointsAndNextQuestion(ActionEvent event, RadioButton selectedRadioButton, Answer correctAnswer) {
+        if (questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)) {
+            Score.increaseScore(POINTS_PER_CORRECT_ANSWER);
+            questionCounter++;
+        }else if(!questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){
+            questionCounter++;
+        }
     }
+
 
     private void closeWindowAndOpenNext(ActionEvent event, String s) {
         try {
@@ -101,15 +106,17 @@ public class QuestionsMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        currentQuestion(count);
-        radioButtonsAnswersText(count);
-        scoreNumber.setText(Integer.toString(Score.getScoreInstance().returnNum()));
-        PlayerRepository playerRepository = new PlayerRepository();
-        Player player = playerRepository.getLastEntry();
-        playerText.setText(player.getName());
+        setCurrentQuestionToDisplay(questionCounter);
+        setRadioButtonsAnswersText(questionCounter);
+        setScoreToDisplay();
+        setPlayerNameToDisplay();
     }
 
-    private void radioButtonsAnswersText(int questionId) {
+    private void setCurrentQuestionToDisplay(int questionId) {
+        questionText.setText(questionController.findQuestionByIdAndGetQuestionValue(questionId));
+    }
+
+    private void setRadioButtonsAnswersText(int questionId) {
         List<Answer> answers = answerRepository.answersWhereQuestionIdIsSame(questionId);
         option1.setText(answers.get(0).getAnswer());
         option2.setText(answers.get(1).getAnswer());
@@ -117,7 +124,11 @@ public class QuestionsMenuController implements Initializable {
         option4.setText(answers.get(3).getAnswer());
     }
 
-    private void currentQuestion(int questionId) {
-        questionText.setText(qr.findQuestionById(questionId).getQuestion());
+    private void setPlayerNameToDisplay() {
+        playerText.setText(playerController.getLastSavedPlayerNameAndReturnItsValue());
+    }
+
+    private void setScoreToDisplay() {
+        scoreNumber.setText(Integer.toString(Score.getScoreInstance().returnNum()));
     }
 }

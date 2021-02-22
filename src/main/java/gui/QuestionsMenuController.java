@@ -11,11 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Answer;
-import model.Player;
 import model.Score;
 import persistance.AnswerRepository;
-import persistance.PlayerRepository;
-import persistance.QuestionRepository;
+
 
 import java.net.URL;
 import java.util.List;
@@ -82,7 +80,8 @@ public class QuestionsMenuController implements Initializable {
 
     private void checkIfCorrectThenAssignPointsElseNoPointsAndNextQuestion(ActionEvent event, RadioButton selectedRadioButton, Answer correctAnswer) {
         if (questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)) {
-            Score.increaseScore(POINTS_PER_CORRECT_ANSWER);
+            score.increaseScore(POINTS_PER_CORRECT_ANSWER);
+            playerController.saveLastSavedPlayersScore(score.returnNum());
             questionCounter++;
         }else if(!questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){
             questionCounter++;
@@ -125,10 +124,10 @@ public class QuestionsMenuController implements Initializable {
     }
 
     private void setPlayerNameToDisplay() {
-        playerText.setText(playerController.getLastSavedPlayerNameAndReturnItsValue());
+        playerText.setText(Integer.toString(score.returnNum()));
     }
 
     private void setScoreToDisplay() {
-        scoreNumber.setText(Integer.toString(Score.getScoreInstance().returnNum()));
+        scoreNumber.setText(Integer.toString(playerController.getLastSavedPlayersScore()));
     }
 }

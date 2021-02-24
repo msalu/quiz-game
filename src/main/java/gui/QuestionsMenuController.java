@@ -27,8 +27,8 @@ public class QuestionsMenuController implements Initializable {
 
     private static int questionCounter = 1;
     private static final int POINTS_PER_CORRECT_ANSWER = 1;
-    private static final int AMOUNT_OF_QUESTIONS_IN_QUIZ = 5;
-    private static int score;
+    protected static final int AMOUNT_OF_QUESTIONS_IN_QUIZ = 5;
+    protected static int score;
 
     private QuestionController questionController;
     private PlayerController playerController;
@@ -65,22 +65,21 @@ public class QuestionsMenuController implements Initializable {
         RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
         Answer correctAnswer = answerRepository.getByQuestionIdCorrectAnswer(questionCounter);
 
-        if (questionCounter == AMOUNT_OF_QUESTIONS_IN_QUIZ) closeWindowAndOpenNext(event, "gui/endGame.fxml");
+        if (questionCounter == AMOUNT_OF_QUESTIONS_IN_QUIZ){
+            closeWindowAndOpenNext(event, "gui/checkResults.fxml");
+        }
 
         if (confirmationAlert.get() == ButtonType.OK){
-            checkIfCorrectThenAssignPointsElseNoPointsAndNextQuestion(event, selectedRadioButton, correctAnswer);
+            checkIfCorrectThenAssignPoints(event, selectedRadioButton, correctAnswer);
             closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
         }else if(confirmationAlert.get() == ButtonType.CANCEL){
             return;
         }
-
     }
 
-    private void checkIfCorrectThenAssignPointsElseNoPointsAndNextQuestion(ActionEvent event, RadioButton selectedRadioButton, Answer correctAnswer) {
+    private void checkIfCorrectThenAssignPoints(ActionEvent event, RadioButton selectedRadioButton, Answer correctAnswer) {
         if (questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)) {
-            score = playerController.getLastSavedPlayersScore();
             score = score + POINTS_PER_CORRECT_ANSWER;
-            playerController.saveLastSavedPlayersScore(score);
             questionCounter++;
         }else if(!questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){
             questionCounter++;
@@ -127,6 +126,6 @@ public class QuestionsMenuController implements Initializable {
     }
 
     private void setScoreToDisplay() {
-        scoreNumber.setText(Integer.toString(playerController.getLastSavedPlayersScore()));
+        scoreNumber.setText(Integer.toString(score));
     }
 }

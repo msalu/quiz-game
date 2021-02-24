@@ -1,5 +1,6 @@
 package controller;
 
+import model.DifficultyLevel;
 import model.Player;
 import persistance.PlayerRepository;
 

@@ -1,15 +1,12 @@
 package test;
 
 import controller.PlayerController;
-import model.Answer;
-import model.Question;
-import persistance.AnswerRepository;
+import model.Player;
+import persistance.PlayerRepository;
 
 public class MainTest {
 
     public static void main(String[] args) {
-        PlayerController playerController = new PlayerController();
 
-        System.out.println(playerController.getLastSavedPlayerNameAndReturnItsValue());
     }
 }

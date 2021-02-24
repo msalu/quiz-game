@@ -49,7 +49,7 @@ public class SelectNicknameController implements Initializable {
                 Node source = (Node) event.getSource();
                 stage = (Stage) source.getScene().getWindow();
                 stage.close();
-                scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/questionMenu.fxml")));
+                scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/difficultyLvlSelect.fxml")));
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {

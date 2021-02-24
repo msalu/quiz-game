@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Answer;
+import model.DifficultyLevel;
 import persistance.AnswerRepository;
 
 
@@ -28,7 +29,10 @@ public class QuestionsMenuController implements Initializable {
     private static int questionCounter = 1;
     private static final int POINTS_PER_CORRECT_ANSWER = 1;
     protected static final int AMOUNT_OF_QUESTIONS_IN_QUIZ = 5;
+    private DifficultyLevel difficultyLevel = DifficultyLvlController.difficultyLevel;
+
     protected static int score;
+
 
     private QuestionController questionController;
     private PlayerController playerController;
@@ -82,7 +86,19 @@ public class QuestionsMenuController implements Initializable {
             score = score + POINTS_PER_CORRECT_ANSWER;
             questionCounter++;
         }else if(!questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){
+            pointsAssigmentBasedOnDifficultyLevel();
             questionCounter++;
+        }
+    }
+
+    private void pointsAssigmentBasedOnDifficultyLevel() {
+        switch (difficultyLevel){
+            case MEDIUM:
+                score--;
+                break;
+            case HARD:
+                score = 0;
+                break;
         }
     }
 

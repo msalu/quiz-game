@@ -32,7 +32,8 @@ public class EndGameController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        fieldText.setText(Integer.toString(playerController.getLastSavedPlayersScore()));
+        playerController.saveLastSavedPlayersScore(QuestionsMenuController.score);
+        fieldText.setText(playerController.getLastSavedPlayersScore() + "/" + QuestionsMenuController.AMOUNT_OF_QUESTIONS_IN_QUIZ);
     }
 
 }

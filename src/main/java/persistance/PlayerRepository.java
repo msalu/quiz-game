@@ -1,11 +1,10 @@
 package persistance;
 
+import model.DifficultyLevel;
 import model.Player;
 import util.DBUtil;
 
 import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.Optional;
 
 public class PlayerRepository {
     private EntityManager entityManager;

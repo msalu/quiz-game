@@ -2,13 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-
 
 <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartMenuController">
    <children>
-      <DialogPane contentText="Welcome to Programming Quiz. You will be asked five questions, there can be only one correct answer. Correct answer gives player 1 point. GOOD LUCK! " prefHeight="212.0" prefWidth="386.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="282.0" prefWidth="600.0" text="Welcome to Programming Quiz. &#10;You will be asked five questions, there can be only one correct answer. &#10;Correct answer gives player 1 point. &#10;Games Has 3 difficulty levels, which determine points assigment for wrong answer:&#10;Easy - no points are lost for wrong answer,&#10;Medium - lose 1 point for wrong answer,&#10;Hard - you loose all points when you answer wrong.&#10;GOOD LUCK!" textAlignment="CENTER" />
       <Button mnemonicParsing="false" onAction="#nextPageButton" text="Next">
          <VBox.margin>
             <Insets top="50.0" />

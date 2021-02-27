@@ -2,15 +2,15 @@ package gui;
 
 import controller.PlayerController;
 import controller.QuestionController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+
 import model.Answer;
+import model.DifficultyLevel;
+
 import persistance.AnswerRepository;
 
 
@@ -21,17 +21,20 @@ import java.util.ResourceBundle;
 
 public class QuestionsMenuController implements Initializable {
 
-    private Stage stage;
-    private Scene scene;
     private Alert alert = new Alert(Alert.AlertType.NONE);
+
 
     private static int questionCounter = 1;
     private static final int POINTS_PER_CORRECT_ANSWER = 1;
     protected static final int AMOUNT_OF_QUESTIONS_IN_QUIZ = 5;
+    private DifficultyLevel difficultyLevel = DifficultyLvlController.difficultyLevel;
+
     protected static int score;
+
 
     private QuestionController questionController;
     private PlayerController playerController;
+    private NextWindow nextWindow;
 
     private AnswerRepository answerRepository;
 
@@ -54,6 +57,7 @@ public class QuestionsMenuController implements Initializable {
         answerRepository = new AnswerRepository();
         questionController = new QuestionController();
         playerController = new PlayerController();
+        nextWindow = new NextWindow();
     }
 
     @FXML
@@ -66,12 +70,12 @@ public class QuestionsMenuController implements Initializable {
         Answer correctAnswer = answerRepository.getByQuestionIdCorrectAnswer(questionCounter);
 
         if (questionCounter == AMOUNT_OF_QUESTIONS_IN_QUIZ){
-            closeWindowAndOpenNext(event, "gui/checkResults.fxml");
+            nextWindow.closeWindowAndOpenNext(event, "gui/checkResults.fxml");
         }
 
         if (confirmationAlert.get() == ButtonType.OK){
             checkIfCorrectThenAssignPoints(event, selectedRadioButton, correctAnswer);
-            closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
+            nextWindow.closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
         }else if(confirmationAlert.get() == ButtonType.CANCEL){
             return;
         }
@@ -82,24 +86,21 @@ public class QuestionsMenuController implements Initializable {
             score = score + POINTS_PER_CORRECT_ANSWER;
             questionCounter++;
         }else if(!questionController.checkIfCorrectAnswer(selectedRadioButton, correctAnswer)){
+            pointsAssigmentBasedOnDifficultyLevel();
             questionCounter++;
         }
     }
 
-
-    private void closeWindowAndOpenNext(ActionEvent event, String s) {
-        try {
-            Node source = (Node) event.getSource();
-            stage = (Stage) source.getScene().getWindow();
-            stage.close();
-            scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(s)));
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-           new NoMoreQuestionsException("No more Questions");
+    private void pointsAssigmentBasedOnDifficultyLevel() {
+        switch (difficultyLevel){
+            case MEDIUM:
+                score--;
+                break;
+            case HARD:
+                score = 0;
+                break;
         }
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

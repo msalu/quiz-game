@@ -2,14 +2,10 @@ package gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 import model.DifficultyLevel;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,8 +13,11 @@ public class DifficultyLvlController implements Initializable {
 
     protected static DifficultyLevel difficultyLevel;
 
-    private Stage stage;
-    private Scene scene;
+    private NextWindow nextWindow;
+
+    public DifficultyLvlController(){
+        nextWindow = new NextWindow();
+    }
 
     @FXML
     public void setEasyLvl(ActionEvent event){
@@ -39,16 +38,7 @@ public class DifficultyLvlController implements Initializable {
     }
 
     private void setNewScene(ActionEvent event) {
-        try {
-            Node source = (Node) event.getSource();
-            stage = (Stage) source.getScene().getWindow();
-            stage.close();
-            scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("gui/questionMenu.fxml")));
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        nextWindow.closeWindowAndOpenNext(event, "gui/questionMenu.fxml");
     }
 
     @Override

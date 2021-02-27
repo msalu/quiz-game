@@ -1,6 +1,6 @@
 package controller;
 
-import gui.NoMoreQuestionsException;
+import exception.NoMoreQuestionsException;
 import javafx.scene.control.RadioButton;
 import model.Answer;
 import persistance.QuestionRepository;
